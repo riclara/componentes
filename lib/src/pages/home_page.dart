@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:componentes/src/utils/icono_string_util.dart';
 import 'package:componentes/src/providers/menu_providers.dart';
+import 'package:componentes/src/pages/alert_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -21,19 +23,21 @@ class HomePage extends StatelessWidget {
         future: menuProvider.cargarData(),
         initialData: [],
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-          return ListView(children: _listaItems(snapshot.data));
+          return ListView(children: _listaItems(snapshot.data, context));
         });
   }
 
-  List<Widget> _listaItems(List<dynamic> data) {
-    return data.map((ruta) {
+  List<Widget> _listaItems(List<dynamic> data, BuildContext context) {
+    return data.map((opt) {
       return Column(
         children: <Widget>[
           ListTile(
-            title: Text(ruta['texto']),
-            leading: Icon(Icons.account_circle, color: Colors.blue),
+            title: Text(opt['texto']),
+            leading: getIcon(opt['icon']),
             trailing: Icon(Icons.keyboard_arrow_right),
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, opt['ruta']);
+            },
           ),
           Divider()
         ],
