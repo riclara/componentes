@@ -13,17 +13,6 @@ class HomePageTemp extends StatelessWidget {
     );
   }
 
-  List<Widget> _crearItems() {
-    List<Widget> lista = new List<Widget>();
-    for (var opt in opciones) {
-      final tempWidget = ListTile(
-        title: Text(opt),
-      );
-      lista..add(tempWidget)..add(Divider());
-    }
-    return lista;
-  }
-
   List<Widget> _crearItemsCorta() {
     var widgets = opciones.map((opcion) {
       return Column(
